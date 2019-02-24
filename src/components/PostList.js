@@ -12,7 +12,13 @@ class PostList extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  // state is coming from combineReducers({}) // posts
+  return {posts: state.posts}; // will return as props on PostList
+  // every time our reducers run, mSTP will get called again
+};
+
 export default connect(
-  null,
+  mapStateToProps,
   {fetchPosts}
 )(PostList);
