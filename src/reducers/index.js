@@ -1,5 +1,6 @@
 import {combineReducers} from "redux";
+import postsReducer from "./postsReducer";
 
 export default combineReducers({
-  dummy: () => "hi" // dummy reducer trick when boilerplating to get rid of error
+  posts: postsReducer
 });
