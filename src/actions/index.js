@@ -3,6 +3,7 @@ import jsonPlaceholder from "../apis/jsonPlaceholder";
 
 export const fetchPostsAndUsers = () => async (dispatch, getState) => {
   await dispatch(fetchPosts());
+  /* 
   const userIds = _.uniq(_.map(getState().posts, "userId"));
   // _.map goes through all the different posts and will pull off only the userId
   // _.uniq will return an array with just the unique userIds
@@ -10,6 +11,14 @@ export const fetchPostsAndUsers = () => async (dispatch, getState) => {
   // iterate over userIds - and for every unique id, call fetchUser()
   userIds.forEach(id => dispatch(fetchUser(id)));
   // async await doesn't work with forEach
+ */
+
+  /* Refactored w/ _.chain */
+  _.chain(getState().posts)
+    .map("userId")
+    .uniq()
+    .forEach(id => dispatch(fetchUser(id)))
+    .value();
 };
 
 export const fetchPosts = () => async dispatch => {
